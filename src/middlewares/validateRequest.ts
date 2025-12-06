@@ -17,11 +17,13 @@ const validateRequest = (
   console.log(result);
 
   if (!result.success) {
-    return res.status(400).json({
+    const error = res.status(400).json({
       statusCode: HttpStatusCode.BadRequest,
       error: 'Bad Request',
       message: result.error.issues,
     });
+
+    return next(error);
   }
 
   return next();
